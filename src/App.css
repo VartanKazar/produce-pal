@@ -1,11 +1,23 @@
+/* Contents
+  1.  Globals & Resets
+  2.  Page Classes
+    2.1.  home-page
+  3.  Component Classes
+    3.1.  indexed-card
+*/
+
+
+/* 1. Globals & Resets */
 
 /* Global variables used for the main template. */
 :root {
-  --background-color: #4ABDAC;
-  --highlight-color-gold: #FCCA63;
-  --highlight-color-red: #FC4A1A;
-  --primary-text-color: #DFDCE3;
-  --secondary-text-color: #888888;
+  --background-color-primary: #4ABDAC;    
+  --background-color-secondary: #3d9688;  
+  --highlight-color-gold: #F7B733;  
+  --highlight-color-gold-border: #b37700;    
+  --highlight-color-red: #FC4A1A;   
+  --highlight-color-red-border: #922000;      
+  --text-color-light: #F0F0F0;
 }
 
 /* Browser reset with all parent elements taking the whole page size. */
@@ -17,42 +29,71 @@ html, body, #root {
   font-size: 20px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* 2.  Page Classes */
+
+/* 2.1. home-page */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 4rem);
+  height: 100%;
+  background-color: var(--background-color-primary);
+  padding: 2rem;
+}
+
+
+/* 3. Component Classes */
+
+/* 3.1. indexed-card */
+.indexed-card {
+  position: absolute;
+  width: 20rem;
+  height: 6rem;
+  background-color: var(--highlight-color-gold);
+  border: 2px solid var(--highlight-color-gold-border);
+  border-radius: 0.5rem;
+  color: var(--text-color-light);
+  counter-reset: indexed-card-counter;
+  padding: 0.5rem;
+}
+
+.indexed-card::before {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  position: absolute;
+  counter-increment: indexed-card-counter;
+  content: counter(indexed-card-counter);
+  width: 2rem;
+  height: 2rem;
+  top: -0.5rem;
+  border-radius: 2rem;
+  border: 1px solid var(--highlight-color-red-border);
+  background-color: var(--highlight-color-red);
+  color: var(--text-color-light);
+  z-index: 99;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.indexed-card.odd::before {
+  left: -0.5rem;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.indexed-card.even::before {
+  left: calc(100% - 1.5rem);
 }
+

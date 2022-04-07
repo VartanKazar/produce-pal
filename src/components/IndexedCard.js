@@ -1,0 +1,26 @@
+import React, { useEffect } from 'react';
+
+const IndexedCard = ({index, title, description}) => {
+
+    return (
+        <div 
+        className={`indexed-card ${(index % 2 === 0) ? "even" : "odd"}`}
+        id={`index-card-${index}`} 
+        key={`index-card-${index}`}
+        >
+            <h3
+            style = {{
+                textDecoration: "underline",
+                width: '100%',
+                textAlign: "center"
+            }}
+            >
+                {title}
+            </h3>
+
+            {description}
+        </div>
+    )
+}
+
+export default IndexedCard;
