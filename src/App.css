@@ -4,6 +4,9 @@
     2.1.  home-page
   3.  Component Classes
     3.1.  indexed-card
+    3.2.  navbar
+  4.  Html Overrides
+    4.1.  button
 */
 
 
@@ -48,10 +51,9 @@ h1, h2, h3, h4, h5, h6 {
 .home-page {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 4rem);
+  width: 100%;
   height: 100%;
   background-color: var(--background-color-primary);
-  padding: 2rem;
 }
 
 
@@ -60,7 +62,8 @@ h1, h2, h3, h4, h5, h6 {
 /* 3.1. indexed-card */
 .indexed-card {
   position: absolute;
-  width: 20rem;
+  min-width: 10rem;
+  max-width: 20rem;
   height: 6rem;
   background-color: var(--highlight-color-gold);
   border: 2px solid var(--highlight-color-gold-border);
@@ -97,3 +100,66 @@ h1, h2, h3, h4, h5, h6 {
   left: calc(100% - 1.5rem);
 }
 
+/* 3.2. navbar */
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-color-secondary);
+  padding: 0.5rem clamp(0.75rem, -0.5rem + 8vw, 2rem);
+  color: var(--text-color-light);
+  text-decoration: underline;
+  font-size: clamp(0.6rem, -0.1rem + 2vw, 1rem);
+}
+
+.nav-bar-dropdown {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  color: var(--highlight-color-gold);
+  transition: 0.25s;
+}
+
+.nav-bar-dropdown:hover {
+  scale: 1.2;
+  filter:drop-shadow(2px 2px 1px var(--highlight-color-red-border));
+  transition: 0.25s;
+}
+
+/* 4. Html Overrides */
+
+/* 4.1. button */
+button {
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: var(--highlight-color-gold);
+  color: var(--text-color-light);
+  padding: 0.5rem;
+  border: 1px solid var(--highlight-color-gold-border);
+  border-radius: 0.5rem;
+  z-index: 1;
+}
+
+button::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 0;
+  background: var(--highlight-color-red);
+  border: 1px solid var(--highlight-color-red-border);
+  border-radius: 0.5rem;
+  transition: width 0.3s ease, opacity 0.5s;
+}
+
+button:hover:after {
+  left: 0;
+  width: 100%;
+  opacity: 1;
+  transition: width 0.3s ease, opacity 0.25s;
+}
