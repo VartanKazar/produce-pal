@@ -2,11 +2,13 @@
   1.  Globals & Resets
   2.  Page Classes
     2.1.  home-page
+      2.1.1. steps-section
   3.  Component Classes
     3.1.  indexed-card
     3.2.  navbar
   4.  Html Overrides
     4.1.  button
+  5.  Media Queries
 */
 
 
@@ -18,8 +20,10 @@
   --background-color-secondary: #3d9688;  
   --highlight-color-gold: #F7B733;  
   --highlight-color-gold-border: #b37700;    
+  --highlight-color-gold-shadow: #462f01;
   --highlight-color-red: #FC4A1A;   
-  --highlight-color-red-border: #922000;      
+  --highlight-color-red-border: #922000;  
+  --highlight-color-red-shadow: #411205;    
   --text-color-light: #F0F0F0;
 }
 
@@ -29,7 +33,7 @@ html, body, #root {
   height: 100%;
   padding: 0px;
   margin: 0px;
-  font-size: 20px;
+  font-size: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -50,27 +54,46 @@ h1, h2, h3, h4, h5, h6 {
 /* 2.1. home-page */
 .home-page {
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   width: 100%;
   height: 100%;
   background-color: var(--background-color-primary);
+  padding: 1.5rem;
 }
 
+/* 2.1.1 steps-section */
+.steps-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.steps-section > div:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.steps-section > div:nth-child(even) {
+  align-self: flex-end;
+}
+
+.steps-section > div:not(:last-child) {
+  margin-bottom: 1rem;
+}
 
 /* 3. Component Classes */
 
 /* 3.1. indexed-card */
 .indexed-card {
-  position: absolute;
-  min-width: 10rem;
+  position: relative;
+  min-width: 6rem;
   max-width: 20rem;
-  height: 6rem;
   background-color: var(--highlight-color-gold);
   border: 2px solid var(--highlight-color-gold-border);
   border-radius: 0.5rem;
   color: var(--text-color-light);
   counter-reset: indexed-card-counter;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .indexed-card::before {
@@ -79,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   position: absolute;
   counter-increment: indexed-card-counter;
-  content: counter(indexed-card-counter);
+  content: attr(index);
   width: 2rem;
   height: 2rem;
   top: -0.5rem;
@@ -107,16 +130,15 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
   align-items: center;
   background-color: var(--background-color-secondary);
-  padding: 0.5rem clamp(0.75rem, -0.5rem + 8vw, 2rem);
-  color: var(--text-color-light);
-  text-decoration: underline;
-  font-size: clamp(0.6rem, -0.1rem + 2vw, 1rem);
+  padding: 0.25rem clamp(0.5rem, -0.1rem + 2vw, 2rem);
+  color: var(--highlight-color-gold);
+  font-size: clamp(0.75rem, -0.1rem + 2vw, 1.25rem);
 }
 
 .nav-bar-dropdown {
   cursor: pointer;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--highlight-color-gold);
   transition: 0.25s;
 }
@@ -136,10 +158,11 @@ button {
   font-size: 1rem;
   background-color: var(--highlight-color-gold);
   color: var(--text-color-light);
-  padding: 0.5rem;
+  padding: 0.35rem;
   border: 1px solid var(--highlight-color-gold-border);
   border-radius: 0.5rem;
   z-index: 1;
+  box-shadow: 2px 2px 1px var(--highlight-color-gold-shadow);
 }
 
 button::after {
@@ -157,9 +180,26 @@ button::after {
   transition: width 0.3s ease, opacity 0.5s;
 }
 
+button:hover {
+  scale: 1.05;
+  box-shadow: 3px 3px 2px var(--highlight-color-red-shadow);
+  transition: 0.3s;
+}
+
 button:hover:after {
   left: 0;
   width: 100%;
   opacity: 1;
   transition: width 0.3s ease, opacity 0.25s;
+}
+
+/* 5.  Media Queries */
+
+@media only screen and (min-width: 1024px) {
+
+
+  .steps-section {
+    align-self: center;
+    width: calc(1024px - 1.5rem);
+  }
 }

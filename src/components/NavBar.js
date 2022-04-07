@@ -8,7 +8,7 @@ const NavBar = () => {
         <div className='nav-bar'>
             <FontAwesomeIcon icon={faBars} className="nav-bar-dropdown"/>
 
-            <h1>Produce Pals</h1>
+            <h2>Produce Pal</h2>
 
             <button>Login</button>
         </div>

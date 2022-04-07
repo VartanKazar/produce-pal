@@ -7,6 +7,7 @@ const IndexedCard = ({index, title, description}) => {
         className={`indexed-card ${(index % 2 === 0) ? "even" : "odd"}`}
         id={`index-card-${index}`} 
         key={`index-card-${index}`}
+        index={`${index}`}
         >
             <h3
             style = {{
