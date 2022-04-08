@@ -5,8 +5,9 @@ const Home = () => {
 
     return (
         <div className='home-page'>
-            <div className='steps-section'>
+            <h1>Log in to be able to add recipe ingredients to your mobile shopping list!</h1>
 
+            <div className='steps-section'>
                 <IndexedCard 
                 index={1}
                 title="Choose a Recipe"

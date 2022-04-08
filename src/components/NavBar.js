@@ -13,7 +13,7 @@ const NavBar = () => {
         <div className='nav-bar'>
             <FontAwesomeIcon icon={faBars} className="nav-icon-default"/>
 
-            <h2>Produce Pal</h2>
+            <h2 className='nav-bar-title'>Produce Pal</h2>
 
             <div className='nav-bar-user-section'>
 
