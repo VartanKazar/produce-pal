@@ -35,6 +35,8 @@ html, body, #root {
   padding: 0px;
   margin: 0px;
   font-size: 100%;
+  background-color: var(--background-color-primary);
+  color: var(--text-color-light)
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,7 +60,6 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
   flex-direction: column;
   width: 100%;
-  background-color: var(--background-color-primary);
   padding: 1.5rem;
 }
 
@@ -91,7 +92,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--highlight-color-gold);
   border: 2px solid var(--highlight-color-gold-border);
   border-radius: 0.5rem;
-  color: var(--text-color-light);
   counter-reset: indexed-card-counter;
   padding: 1rem;
 }
@@ -109,7 +109,6 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 2rem;
   border: 1px solid var(--highlight-color-red-border);
   background-color: var(--highlight-color-red);
-  color: var(--text-color-light);
   z-index: 99;
   font-size: 1.25rem;
   font-weight: bold;
