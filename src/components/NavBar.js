@@ -24,6 +24,11 @@ const NavBar = () => {
         else setDrawer(0)
     }
 
+    const handleClickOut = (event) => {
+        if(event.target.id = "nav-bar-drawer-container")
+            setDrawer(0)
+    }
+
     return (
         <React.Fragment>
 
@@ -44,11 +49,13 @@ const NavBar = () => {
                     </div>
                     <button>Login</button>
                 </div>
-
-
             </div>
 
-            <aside className={`nav-bar-drawer-container ${drawer === 1 ? "active" : ""}`}/>
+            <aside 
+            className={`nav-bar-drawer-container ${drawer === 1 ? "active" : ""}`} 
+            id="nav-bar-drawer-container"
+            onClick={(e) => handleClickOut(e)}
+            />
 
             <aside className={`nav-bar-drawer ${drawer === 1 ? "active" : ""}`}>
                 
