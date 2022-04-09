@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faCalendarAlt, faAnglesLeft, faAnglesRight } from "@fortawesome/free-solid-svg-icons"
+import { faCartShopping, faCalendarAlt, faCircleXmark, faBars } from "@fortawesome/free-solid-svg-icons"
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -12,42 +13,54 @@ const NavBar = () => {
     const [drawer, setDrawer] = useState(0)
 
     const handleDrawerClick = () => {
-        if(drawer === 0)
+        if(drawer === 0){
             setDrawer(1)
+            // var root = document.getElementById("Page")
+            // root.style.filter = "blur(5px) brightness(0.25)"
+            // root.style.pointerEvents = "none"
+
+        }
         
         else setDrawer(0)
     }
 
     return (
-        <div className={`nav-bar ${drawer === 1 ? "drawer-active" : ""}`} id="nav-bar-container">
-            {drawer === 0 &&
-            <FontAwesomeIcon icon={faAnglesRight} className="nav-icon-default" onClick={() => handleDrawerClick()}/>
-            }
+        <React.Fragment>
 
-            <h2 className='nav-bar-title'>Produce Pal</h2>
+            <div className="nav-bar">
+                
+                <FontAwesomeIcon icon={faBars} className="nav-icon-default" onClick={() => handleDrawerClick()}/>
+                
+                <h2 className='nav-bar-title'>Produce Pal</h2>
 
-            <div className='nav-bar-user-section'>
+                <div className='nav-bar-user-section'>
 
-                <div className={`nav-icon-indexed ${plannerItemCount === 0 ? "hidden" : ""}`} count={plannerItemCount} >
-                    <FontAwesomeIcon icon={faCalendarAlt} className="nav-icon-default"/>
+                    <div className={`nav-icon-indexed ${plannerItemCount === 0 ? "hidden" : ""}`} count={plannerItemCount} >
+                        <FontAwesomeIcon icon={faCalendarAlt} className="nav-icon-default"/>
+                    </div>
+
+                    <div className={`nav-icon-indexed ${cartitemCount === 0  ? "hidden" : ""}`} count={cartitemCount} >
+                        <FontAwesomeIcon icon={faCartShopping} className="nav-icon-default"/>
+                    </div>
+                    <button>Login</button>
                 </div>
 
-                <div className={`nav-icon-indexed ${cartitemCount === 0  ? "hidden" : ""}`} count={cartitemCount} >
-                    <FontAwesomeIcon icon={faCartShopping} className="nav-icon-default"/>
-                </div>
-                <button>Login</button>
+
             </div>
 
-                <div className={`nav-bar-drawer ${drawer === 1 ? "active" : ""}`}>
-                    {drawer === 1 && 
-                        <FontAwesomeIcon 
-                        icon={faAnglesLeft} 
-                        className="nav-icon-default drawer-collapse-icon" 
-                        onClick={() => handleDrawerClick()}/>
-                    }
-                </div>
+            <aside className={`nav-bar-drawer-container ${drawer === 1 ? "active" : ""}`}/>
 
-        </div>
+            <aside className={`nav-bar-drawer ${drawer === 1 ? "active" : ""}`}>
+                
+                <FontAwesomeIcon 
+                icon={faCircleXmark} 
+                className="nav-icon-default drawer-collapse-icon" 
+                onClick={() => handleDrawerClick()}/>
+                
+                <a id="nav-bar-link" href="/">Home</a>
+                <a id="nav-bar-link" href="/recipes">Recipes</a>
+            </aside>
+        </React.Fragment>
     )
 }
 

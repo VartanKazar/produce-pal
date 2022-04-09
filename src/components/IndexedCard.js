@@ -4,7 +4,7 @@ const IndexedCard = ({index, title, description}) => {
 
     return (
         <div 
-        className={`indexed-card ${(index % 2 === 0) ? "even" : "odd"}`}
+        className="indexed-card"
         id={`index-card-${index}`} 
         key={`index-card-${index}`}
         index={`${index}`}

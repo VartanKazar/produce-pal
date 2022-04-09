@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Recipes = () => {
 
     return (
-        <div>
+        <div className='recipes-page'>
             RECIPES
         </div>
     )
