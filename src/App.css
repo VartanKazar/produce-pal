@@ -7,6 +7,7 @@
   3.  Component Classes
     3.1.  indexed-card
     3.2.  navbar
+    3.3.  search-container-single
   4.  Html Overrides
     4.1.  button
   5.  Font Awesome Overrides
@@ -28,6 +29,7 @@
   --highlight-color-red-border: #922000;  
   --highlight-color-red-shadow: #411205;    
   --text-color-light: #F0F0F0;
+  --text-color-placeholder: #999999;
 }
 
 /* Browser reset with all parent elements taking the whole page size. */
@@ -62,7 +64,7 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
   flex-direction: column;
   width: 100%;
-  padding: 5rem 1.5rem;
+  padding-top: 3rem;
 }
 
 /* 2.1.1 steps-section */
@@ -75,6 +77,8 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
   gap: 2rem;
   width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .promotional-section {
@@ -84,9 +88,9 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
   justify-content: center;
   gap: 2rem;
-  width: calc(100% + 3rem);
-  padding: 3rem 1.5rem;
+  width: 100%;
   background-color: var(--background-color-accent);
+  padding: 1rem 1rem;
 }
 
 /* 2.2. recipes-page */
@@ -98,6 +102,7 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
   flex-direction: column;
   width: 100%;
+  padding: 3rem 1rem 0rem 1rem;
 }
 
 /* 3. Component Classes */
@@ -309,6 +314,94 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid var(--highlight-color-gold);
   transition: 0.25s;
 }
+
+/* 3.3. search-container-single */
+.search-container-single {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 2rem);
+  min-width: 6rem;
+  max-width: 50rem;
+  background-color: var(--background-color-accent);
+  border: 2px solid var(--highlight-color-gold-border);
+  border-radius: 2rem;
+  transition: 0.25s;
+}
+
+.search-container-single:focus-within {
+  border: 2px solid var(--highlight-color-gold);
+  filter: brightness(1.1);
+  transition: 0.25s;
+}
+
+.search-icon-container {
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  right: -1rem;
+  display: flex;
+  justify-content: center;
+  justify-self: flex-end;
+  box-sizing: border-box;
+  width: 3rem;
+  height: calc(2rem + 2px);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--highlight-color-gold);
+}
+
+.search-icon {
+   height: 100%; 
+   z-index: 20;
+}
+
+.search-icon-container::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  opacity: 0;
+  border-radius: 1rem;
+  background: var(--highlight-color-red);
+  transition: width 0.3s ease, opacity 0.25s ease;
+}
+
+.search-icon-container:hover:after {
+  left: 0;
+  width: 100%;
+  opacity: 1;
+  transition: width 0.3s ease, opacity 0.25s ease;
+}
+
+.textfield-simple {
+  resize: none;
+  height: auto;
+  width: calc(100% - 6rem);
+  background-color: transparent;
+  border: none;
+  color: var(--text-color-light);
+  font-size: 1.5rem;
+  word-wrap: normal;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow: hidden;
+  padding: 1rem;
+  line-height: 0rem;
+  transition: 0.25s;
+}
+
+.textfield-simple::placeholder {
+  color: var(--text-color-placeholder);
+}
+
+.textfield-simple:focus {
+  outline: none;
+}
+
 
 /* 4. Html Overrides */
 

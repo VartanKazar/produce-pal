@@ -12,18 +12,15 @@ const NavBar = () => {
 
     const [drawer, setDrawer] = useState(0)
 
+    //Opens the navbar drawer to the left when the drop down icon is clicked.
     const handleDrawerClick = () => {
-        if(drawer === 0){
+        if(drawer === 0)
             setDrawer(1)
-            // var root = document.getElementById("Page")
-            // root.style.filter = "blur(5px) brightness(0.25)"
-            // root.style.pointerEvents = "none"
-
-        }
         
         else setDrawer(0)
     }
 
+    //Closes the navbar drawer when the user clicks outside the drawer its self.
     const handleClickOut = (event) => {
         if(event.target.id = "nav-bar-drawer-container")
             setDrawer(0)
