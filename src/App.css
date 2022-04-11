@@ -7,7 +7,8 @@
   3.  Component Classes
     3.1.  indexed-card
     3.2.  navbar
-    3.3.  search-container-single
+    3.3.  Search Bar
+    3.4.  Recipe Card
   4.  Html Overrides
     4.1.  button
   5.  Font Awesome Overrides
@@ -19,17 +20,17 @@
 
 /* Global variables used for the main template. */
 :root {
-  --background-color-primary: #4ABDAC;    
-  --background-color-secondary: #3d9688;  
-  --background-color-accent: #70dbcb;  
-  --highlight-color-gold: #F7B733;  
-  --highlight-color-gold-border: #b37700;    
+  --background-color-primary: #85ebdb;    
+  --background-color-secondary: #54aa9d;  
+  --background-color-accent: #affaef;  
+  --highlight-color-gold: #fff675;  
+  --highlight-color-gold-border: #835700;    
   --highlight-color-gold-shadow: #462f01;
-  --highlight-color-red: #FC4A1A;   
-  --highlight-color-red-border: #922000;  
-  --highlight-color-red-shadow: #411205;    
-  --text-color-light: #F0F0F0;
-  --text-color-placeholder: #999999;
+  --highlight-color-red: #e97c81;   
+  --highlight-color-red-border: rgb(173, 73, 45);  
+  --highlight-color-red-shadow: #4e1606;    
+  --text-color-light: #000000;
+  --text-color-placeholder: #4e4e4e;
 }
 
 /* Browser reset with all parent elements taking the whole page size. */
@@ -96,6 +97,7 @@ h1, h2, h3, h4, h5, h6 {
 /* 2.2. recipes-page */
 .recipes-page {
   display: flex;
+  flex-direction: column;
   gap: 2rem;
   justify-content: center;
   align-items: center;
@@ -104,6 +106,30 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   padding: 3rem 1rem 0rem 1rem;
 }
+
+.recipes-category-container {
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  max-height: 30rem;
+}
+
+.recipes-page-section {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 1px solid black;
+  height: 100%;
+}
+
 
 /* 3. Component Classes */
 
@@ -315,7 +341,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.25s;
 }
 
-/* 3.3. search-container-single */
+/* 3.3. Search Bar */
 .search-container-single {
   position: relative;
   display: flex;
@@ -324,7 +350,7 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 6rem;
   max-width: 50rem;
   background-color: var(--background-color-accent);
-  border: 2px solid var(--highlight-color-gold-border);
+  border: 3px solid var(--highlight-color-gold-border);
   border-radius: 2rem;
   transition: 0.25s;
 }
@@ -402,6 +428,74 @@ h1, h2, h3, h4, h5, h6 {
   outline: none;
 }
 
+/* 3.4. Recipe Card */
+.recipe-card-front-container {
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--highlight-color-gold);
+  border: 1px solid red;
+  min-width: 10rem;
+  max-width: 20rem;
+  width: 100%;
+  height: 100%;
+}
+
+.recipe-image-container {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.recipe-image {
+  object-fit: scale-down;
+  overflow: hidden;
+}
+
+.recipe-card-star-section {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stars-outer {
+  position: relative;
+  display: inline-block;
+}
+
+.stars-outer::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: #ccc;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: var(--highlight-color-red);
+}
 
 /* 4. Html Overrides */
 
