@@ -9,6 +9,8 @@
     3.2.  navbar
     3.3.  Search Bar
     3.4.  Recipe Card
+    3.5.  Rating Section
+    3.6.  Modal Section
   4.  Html Overrides
     4.1.  button
   5.  Font Awesome Overrides
@@ -22,25 +24,39 @@
 :root {
   --background-color-primary: #85ebdb;    
   --background-color-secondary: #54aa9d;  
-  --background-color-accent: #affaef;  
+  --background-color-accent: #b7f7ec;
+  --shadow-color: #1b1b1b;
   --highlight-color-gold: #fff675;  
-  --highlight-color-gold-border: #835700;    
-  --highlight-color-gold-shadow: #462f01;
+  --highlight-color-gold-border: #ad770a;    
+
+  /* Used for gold colored interactions with an after element. */
+  --highlight-gold-after: #ffb875;
+  --highlight-gold-after-border: #ad870a;
+
   --highlight-color-red: #e97c81;   
   --highlight-color-red-border: rgb(173, 73, 45);  
-  --highlight-color-red-shadow: #4e1606;    
-  --text-color-light: #000000;
+  --text-color-primary: #000000;
   --text-color-placeholder: #4e4e4e;
+
+  /* Used for buttons and other interactable elements against the gold background color. */
+  --interaction-primary: #cefff7; 
+  --interaction-primary-border: #3e9284;
+  --interaction-primary-after: #c0afee;
+  --interaction-primary-after-border: #3b00dd;
+
+  --fadeout-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Browser reset with all parent elements taking the whole page size. */
 html, body, #root {
+  height: 100vh;
   padding: 0px;
   margin: 0px;
   font-size: clamp(85%, 2vw, 100%);
   background-color: var(--background-color-primary);
-  color: var(--text-color-light);
-  font-family: 'Courier New', Courier, monospace;
+  color: var(--text-color-primary);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-y: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -82,6 +98,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 1rem;
 }
 
+/* 2.1.2. promotional-section */
 .promotional-section {
   display: flex;
   flex-direction: row;
@@ -125,9 +142,8 @@ h1, h2, h3, h4, h5, h6 {
   overflow-x: auto;
   overflow-y: hidden;
   box-sizing: border-box;
-  padding: 1rem;
-  border: 1px solid black;
   height: 100%;
+  padding: 1rem;
 }
 
 
@@ -154,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
   width: calc(100% - 0.5rem - 2px);
   height: calc(100% - 0.5rem - 2px);
   background-color: var(--highlight-color-gold);
-  box-shadow: inset 0 0 8px 1px var(--highlight-color-gold-shadow);
+  box-shadow: inset 0 0 8px 1px var(--shadow-color);
   border: 1px solid var(--highlight-color-gold-border);
   border-radius: 0.5rem;
   z-index: -1;
@@ -177,7 +193,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 11;
   font-size: 1.25rem;
   font-weight: bold;
-  box-shadow: inset 0 0 4px 1px var(--highlight-color-red-shadow);
+  box-shadow: inset 0 0 4px 1px var(--shadow-color);
 }
 
 /* 3.2. navbar */
@@ -197,9 +213,6 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.5s;
 }
 
-.nav-bar-title {
-  display: none;
-}
 
 .nav-bar-drawer-container {
   visibility: hidden;
@@ -219,7 +232,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 0;
   z-index: 90;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--fadeout-color);
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -239,20 +252,17 @@ h1, h2, h3, h4, h5, h6 {
   width: 0;
   height: 100%;
   background-color: var(--background-color-secondary);
-  opacity: 0;
   z-index: -3;
   transition: 0.3s;
+  overflow: hidden;
 }
 
 .nav-bar-drawer.active {
   visibility: visible;
-  opacity: 1;
   width: 24ch;
   z-index: 99;
   transition: 0.3s;
 }
-
-
 
 .nav-bar-user-section {
   display: flex;
@@ -260,7 +270,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
   transition: 0.25s;
 }
 
@@ -274,7 +284,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-icon-default:hover {
   scale: 1.2;
-  filter:drop-shadow(2px 2px 1px var(--highlight-color-gold-shadow));
+  filter:drop-shadow(2px 2px 1px var(--shadow-color));
   transition: 0.25s;
 }
 
@@ -293,7 +303,7 @@ h1, h2, h3, h4, h5, h6 {
   right: -0.35rem;
   width: 1rem;
   height: 1rem;
-  color: var(--text-color-light);
+  color: var(--text-color-primary);
   background-color: var(--highlight-color-red);
   border-radius: 1rem;
   padding: 0.1rem;
@@ -312,7 +322,7 @@ h1, h2, h3, h4, h5, h6 {
   scale: 1.3;
   bottom: -0.5rem;
   right: -0.5rem;
-  filter:drop-shadow(2px 2px 1px var(--highlight-color-gold-shadow));
+  filter:drop-shadow(2px 2px 1px var(--shadow-color));
 }
 
 .nav-icon-default.drawer-collapse-icon {
@@ -332,13 +342,17 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   transition: 0.25s;
   text-decoration: none;
-  color: var(--text-color-light)
+  color: var(--text-color-primary)
 }
 
 #nav-bar-link:hover {
   background-color: var(--background-color-primary);
   border-bottom: 1px solid var(--highlight-color-gold);
   transition: 0.25s;
+}
+
+#account-button {
+  display: block;
 }
 
 /* 3.3. Search Bar */
@@ -350,7 +364,7 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 6rem;
   max-width: 50rem;
   background-color: var(--background-color-accent);
-  border: 3px solid var(--highlight-color-gold-border);
+  border: 2px solid var(--highlight-color-gold-border);
   border-radius: 2rem;
   transition: 0.25s;
 }
@@ -392,7 +406,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 10;
   opacity: 0;
   border-radius: 1rem;
-  background: var(--highlight-color-red);
+  background: var(--highlight-gold-after);
   transition: width 0.3s ease, opacity 0.25s ease;
 }
 
@@ -409,7 +423,7 @@ h1, h2, h3, h4, h5, h6 {
   width: calc(100% - 6rem);
   background-color: transparent;
   border: none;
-  color: var(--text-color-light);
+  color: var(--text-color-primary);
   font-size: 1.5rem;
   word-wrap: normal;
   white-space: pre;
@@ -429,7 +443,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* 3.4. Recipe Card */
-.recipe-card-front-container {
+.recipe-card-container {
   gap: 0.5rem;
   flex: 1 1 auto;
   cursor: pointer;
@@ -440,12 +454,14 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   background-color: var(--highlight-color-gold);
-  border: 1px solid red;
+  border: 2px solid var(--highlight-color-gold-border);
+  box-shadow: 3px 2px 6px 1px var(--shadow-color);
   min-width: 10rem;
   max-width: 20rem;
   width: 100%;
   height: 100%;
 }
+
 
 .recipe-image-container {
   box-sizing: border-box;
@@ -467,8 +483,10 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  border-bottom: 1px dotted var(--text-color-primary);
 }
 
+/* 3.5. Ratings Section */
 .stars-outer {
   position: relative;
   display: inline-block;
@@ -497,6 +515,42 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--highlight-color-red);
 }
 
+/* 3.6. Modal Section */
+.modal-container {
+  display: flex;
+  visibility: hidden;
+  z-index: -99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: all 0.3s;
+}
+
+.modal-container.active {
+  visibility: visible;
+  z-index: 99;
+  background-color: var(--fadeout-color);
+  transition: all 0.3s;
+}
+
+.modal-content-container {
+  max-width: 90%;
+  max-height: 90%;
+  margin: 2rem;
+  background-color: white;
+  display: flex;
+  box-sizing: border-box;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
 /* 4. Html Overrides */
 
 /* 4.1. button */
@@ -504,13 +558,13 @@ button {
   position: relative;
   cursor: pointer;
   font-size: 1rem;
-  background-color: var(--highlight-color-gold);
-  color: var(--text-color-light);
+  color: var(--text-color-primary);
   padding: 0.35rem;
+  background-color: var(--highlight-color-gold);
   border: 1px solid var(--highlight-color-gold-border);
   border-radius: 0.5rem;
+  box-shadow: 2px 2px 1px var(--shadow-color);
   z-index: 1;
-  box-shadow: 2px 2px 1px var(--highlight-color-gold-shadow);
 }
 
 button::after {
@@ -522,17 +576,12 @@ button::after {
   right: 0;
   z-index: -1;
   opacity: 0;
-  background: var(--highlight-color-red);
-  border: 1px solid var(--highlight-color-red-border);
+  background: var(--highlight-gold-after);
+  border: 1px solid var(--highlight-after-border);
   border-radius: 0.5rem;
   transition: width 0.3s ease, opacity 0.5s;
 }
 
-button:hover {
-  scale: 1.05;
-  box-shadow: 3px 3px 2px var(--highlight-color-red-shadow);
-  transition: 0.3s;
-}
 
 button:hover:after {
   left: 0;
@@ -541,25 +590,62 @@ button:hover:after {
   transition: width 0.3s ease, opacity 0.25s;
 }
 
+button[variant="alt"] {
+  background-color: var(--interaction-primary);
+  border: 1px solid var(--interaction-primary-border);
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 1px var(--shadow-color);
+  transition: 0.3s;
+}
+
+button[variant="alt"]::after {
+  background: var(--interaction-primary-after);
+  border: 1px solid var(--interaction-primary-after-border);
+  border-radius: 0.5rem;
+  transition: width 0.3s ease, opacity 0.5s;
+}
+
+button:hover, button[variant="alt"]:hover {
+  scale: 1.05;
+  box-shadow: 4px 4px 2px var(--shadow-color);
+  transition: 0.3s;
+}
+
 /* 5.  Font Awesome overrides */
 .fa-cart-shopping, .fa-calendar-days, .fa-bars, .fa-circle-xmark {
   stroke: var(--highlight-color-gold-border);
   stroke-width: 1.5rem;
 }
 
+.fa-chevron-down {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--background-color-primary);
+  stroke: var(--highlight-color-gold-border);
+  stroke-width: 1rem;
+}
+
 /* 6.  Media Queries */
 
-@media only screen and (min-width: 600px) {
-  .nav-bar {
-    padding-left: clamp(0.5rem, -0.1rem + 2vw, 2rem);
-    padding-right: clamp(0.5rem, -0.1rem + 2vw, 2rem);
+/* Styles for mobile devices */
+@media only screen and 
+(min-width: 300px) and
+(max-width: 800px) {
+
+  #account-button {
+    display: none;
   }
 
   .nav-bar-user-section {
-    gap: 2rem;
+    gap: 1rem;
   }
-  
-  .nav-bar-title {
-    display: block;
+
+  .nav-bar-drawer.active {
+    width: 12rem;
+  }
+
+  .modal-content-container {
+    max-width: 95%;
+    max-height: 95%;
   }
 }

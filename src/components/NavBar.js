@@ -10,6 +10,9 @@ const NavBar = () => {
     const cartitemCount = 0;
     const plannerItemCount = 0;
 
+    //Dummy variable to make the nav bar functionality work.
+    var user;
+
     const [drawer, setDrawer] = useState(0)
 
     //Opens the navbar drawer to the left when the drop down icon is clicked.
@@ -44,7 +47,7 @@ const NavBar = () => {
                     <div className={`nav-icon-indexed ${cartitemCount === 0  ? "hidden" : ""}`} count={cartitemCount} >
                         <FontAwesomeIcon icon={faCartShopping} className="nav-icon-default"/>
                     </div>
-                    <button>Login</button>
+                    <button id="account-button">Login</button>
                 </div>
             </div>
 
@@ -63,6 +66,7 @@ const NavBar = () => {
                 
                 <a id="nav-bar-link" href="/">Home</a>
                 <a id="nav-bar-link" href="/recipes">Recipes</a>
+                <a id="nav-bar-link">{user ? "Sign Out" : "Sign In"}</a>
             </aside>
         </React.Fragment>
     )
