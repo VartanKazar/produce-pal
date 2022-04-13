@@ -3,6 +3,7 @@
   2.  Page Classes
     2.1.  home-page
       2.1.1. steps-section
+      2.1.2. promotional-section
     2.2.  recipes-page
   3.  Component Classes
     3.1.  indexed-card
@@ -31,7 +32,7 @@
 
   /* Used for gold colored interactions with an after element. */
   --highlight-gold-after: #ffb875;
-  --highlight-gold-after-border: #ad870a;
+  --highlight-gold-after-border: #7c5f00;
 
   --highlight-color-red: #e97c81;   
   --highlight-color-red-border: rgb(173, 73, 45);  
@@ -274,20 +275,6 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.25s;
 }
 
-.nav-icon-default {
-  cursor: pointer;
-  width: 1.8rem;
-  height: 1.8rem;
-  color: var(--highlight-color-gold);
-  transition: 0.25s;
-}
-
-.nav-icon-default:hover {
-  scale: 1.2;
-  filter:drop-shadow(2px 2px 1px var(--shadow-color));
-  transition: 0.25s;
-}
-
 .nav-icon-indexed {
   position: relative;
 }
@@ -325,7 +312,7 @@ h1, h2, h3, h4, h5, h6 {
   filter:drop-shadow(2px 2px 1px var(--shadow-color));
 }
 
-.nav-icon-default.drawer-collapse-icon {
+.fa-styled-default.drawer-collapse-icon {
   justify-self: flex-end;
   align-self: flex-start;
   margin: 1rem;
@@ -377,15 +364,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .search-icon-container {
   cursor: pointer;
-  position: relative;
+  position: absolute;
   top: 0;
-  right: -1rem;
+  right: 0;
   display: flex;
   justify-content: center;
   justify-self: flex-end;
   box-sizing: border-box;
   width: 3rem;
-  height: calc(2rem + 2px);
+  height: 100%;
   padding: 0.5rem;
   border-radius: 1rem;
   background-color: var(--highlight-color-gold);
@@ -429,8 +416,8 @@ h1, h2, h3, h4, h5, h6 {
   white-space: pre;
   overflow-wrap: normal;
   overflow: hidden;
-  padding: 1rem;
   line-height: 0rem;
+  padding: 0rem 1rem;
   transition: 0.25s;
 }
 
@@ -542,13 +529,11 @@ h1, h2, h3, h4, h5, h6 {
 .modal-content-container {
   max-width: 90%;
   max-height: 90%;
-  margin: 2rem;
-  background-color: white;
-  display: flex;
+  background-color: var(--background-color-accent);
   box-sizing: border-box;
   padding: 1rem;
-  justify-content: center;
-  align-items: center;
+  border: 1px solid black;
+  border-radius: 1rem;
 }
 
 /* 4. Html Overrides */
@@ -577,7 +562,6 @@ button::after {
   z-index: -1;
   opacity: 0;
   background: var(--highlight-gold-after);
-  border: 1px solid var(--highlight-after-border);
   border-radius: 0.5rem;
   transition: width 0.3s ease, opacity 0.5s;
 }
@@ -600,21 +584,34 @@ button[variant="alt"] {
 
 button[variant="alt"]::after {
   background: var(--interaction-primary-after);
-  border: 1px solid var(--interaction-primary-after-border);
   border-radius: 0.5rem;
   transition: width 0.3s ease, opacity 0.5s;
 }
 
-button:hover, button[variant="alt"]:hover {
-  scale: 1.05;
-  box-shadow: 4px 4px 2px var(--shadow-color);
-  transition: 0.3s;
-}
 
 /* 5.  Font Awesome overrides */
-.fa-cart-shopping, .fa-calendar-days, .fa-bars, .fa-circle-xmark {
+
+.fa-styled-default {
+  cursor: pointer;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--highlight-color-gold);
+}
+
+.fa-cart-shopping, .fa-calendar-days, .fa-bars, 
+.fa-circle-xmark, .fa-pencil, .fa-trash-can {
   stroke: var(--highlight-color-gold-border);
   stroke-width: 1.5rem;
+  filter: drop-shadow(1px 1px 1px var(--shadow-color));
+  transition: 0.25s;
+}
+
+.fa-cart-shopping:hover, .fa-calendar-days:hover, 
+.fa-bars:hover, .fa-circle-xmark:hover, .fa-pencil:hover,
+.fa-trash-can:hover {
+  color: var(--highlight-gold-after);
+  stroke: var(--highlight-gold-after-border);
+  transition: all 0.25s;
 }
 
 .fa-chevron-down {
@@ -648,4 +645,6 @@ button:hover, button[variant="alt"]:hover {
     max-width: 95%;
     max-height: 95%;
   }
+  
+
 }

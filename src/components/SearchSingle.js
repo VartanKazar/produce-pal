@@ -6,7 +6,8 @@ const SearchSingle = () => {
 
     return (
         <div className='search-container-single'>
-            <textarea 
+            <input 
+            type="search"
             className='textfield-simple'
             placeholder="Search for a recipe"
             spellCheck={false}

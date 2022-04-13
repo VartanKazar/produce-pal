@@ -34,18 +34,18 @@ const NavBar = () => {
 
             <div className="nav-bar">
                 
-                <FontAwesomeIcon icon={faBars} className="nav-icon-default" onClick={() => handleDrawerClick()}/>
+                <FontAwesomeIcon icon={faBars} className="fa-styled-default" onClick={() => handleDrawerClick()}/>
                 
                 <h2 className='nav-bar-title'>Produce Pal</h2>
 
                 <div className='nav-bar-user-section'>
 
                     <div className={`nav-icon-indexed ${plannerItemCount === 0 ? "hidden" : ""}`} count={plannerItemCount} >
-                        <FontAwesomeIcon icon={faCalendarAlt} className="nav-icon-default"/>
+                        <FontAwesomeIcon icon={faCalendarAlt} className="fa-styled-default"/>
                     </div>
 
                     <div className={`nav-icon-indexed ${cartitemCount === 0  ? "hidden" : ""}`} count={cartitemCount} >
-                        <FontAwesomeIcon icon={faCartShopping} className="nav-icon-default"/>
+                        <FontAwesomeIcon icon={faCartShopping} className="fa-styled-default"/>
                     </div>
                     <button id="account-button">Login</button>
                 </div>
@@ -61,7 +61,7 @@ const NavBar = () => {
                 
                 <FontAwesomeIcon 
                 icon={faCircleXmark} 
-                className="nav-icon-default drawer-collapse-icon" 
+                className="fa-styled-default drawer-collapse-icon" 
                 onClick={() => handleDrawerClick()}/>
                 
                 <a id="nav-bar-link" href="/">Home</a>

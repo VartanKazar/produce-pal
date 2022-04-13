@@ -1,29 +1,13 @@
 import React, { useState } from 'react';
 import RecipeDefaultIcon from "../assets/recipe-default-icon.png"
 import StarRating from './StarRating';
-import Modal from './Modal';
 
-const RecipeCard = ({data}) => {
-
-    const [detailsModal, setDetailsModal] = useState(undefined)
-
-    const handleModalOpen = () => {
-        setDetailsModal(1)
-    }
-
-    const detailsContent = () => {
-
-        return (
-            <div>
-
-            </div>
-        )
-    }
+const RecipeCard = ({data, buttonOnClick}) => {
 
     return (
         <div className='recipe-card-container'>
 
-            <h2 
+            <h3 
             style = {{
                 wordBreak: "break-word",
                 wordWrap: "break-word",
@@ -31,7 +15,7 @@ const RecipeCard = ({data}) => {
                 textAlign: "center"
             }}>
                 {data.name}
-            </h2>
+            </h3>
             {data && data.rating && data.reviews &&
                 <div className='recipe-card-star-section'>
                     <StarRating rating={data.rating}/>
@@ -50,16 +34,10 @@ const RecipeCard = ({data}) => {
 
             <button 
             variant="alt"
-            onClick={() => handleModalOpen()}
+            onClick={buttonOnClick}
             >
                 See Details
             </button>
-            
-            <Modal 
-            state={detailsModal} 
-            content = {detailsContent()}
-            onClose = {() => setDetailsModal(undefined)}
-            />
         </div>
     )
 }
