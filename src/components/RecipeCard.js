@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import RecipeDefaultIcon from "../assets/recipe-default-icon.png"
 import StarRating from './StarRating';
 
-const RecipeCard = ({data, buttonOnClick}) => {
+const RecipeCard = ({data, detailsClick}) => {
 
     return (
-        <div className='recipe-card-container'>
+        <div className='recipe-card-container' key = {`recipe-div-${data.id}`}>
 
             <h3 
             style = {{
@@ -34,7 +34,7 @@ const RecipeCard = ({data, buttonOnClick}) => {
 
             <button 
             variant="alt"
-            onClick={buttonOnClick}
+            onClick={detailsClick}
             >
                 See Details
             </button>

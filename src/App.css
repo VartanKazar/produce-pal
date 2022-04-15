@@ -12,10 +12,11 @@
     3.4.  Recipe Card
     3.5.  Rating Section
     3.6.  Modal Section
-  4.  Html Overrides
-    4.1.  button
-  5.  Font Awesome Overrides
-  6.  Media Queries
+  4.  Utility Classes
+  5.  Html Overrides
+    5.1.  button
+  6.  Font Awesome Overrides
+  7.  Media Queries
 */
 
 
@@ -58,6 +59,8 @@ html, body, #root {
   color: var(--text-color-primary);
   font-family: Arial, Helvetica, sans-serif;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--highlight-color-gold) var(--background-color-secondary);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -122,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
   flex-direction: column;
   width: 100%;
-  padding: 3rem 1rem 0rem 1rem;
+  padding: 3rem 2rem 1rem 2rem;
 }
 
 .recipes-category-container {
@@ -142,9 +145,6 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: stretch;
   overflow-x: auto;
   overflow-y: hidden;
-  box-sizing: border-box;
-  height: 100%;
-  padding: 1rem;
 }
 
 
@@ -527,18 +527,103 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-content-container {
-  max-width: 90%;
-  max-height: 90%;
+  min-width: 30%;
+  min-height: 30%;
+  max-width: 60%;
+  max-height: 75%;
   background-color: var(--background-color-accent);
   box-sizing: border-box;
   padding: 1rem;
   border: 1px solid black;
   border-radius: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+
+  z-index: 100;
 }
 
-/* 4. Html Overrides */
+.recipe-modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
 
-/* 4.1. button */
+.recipe-modal-toolbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.recipe-modal-section {
+  background-color: var(--background-color-primary);
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--background-color-secondary);
+  border-radius: 0.5rem;
+}
+
+.recipe-modal-section > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.recipe-modal-section.bordered > div:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+.review-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.review-title-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-items: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* 4.  Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.width-max-content {
+  width: max-content;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-large {
+  font-size: 1.2rem;
+}
+
+/* 5. Html Overrides */
+
+/* 5.1. button */
 button {
   position: relative;
   cursor: pointer;
@@ -588,8 +673,12 @@ button[variant="alt"]::after {
   transition: width 0.3s ease, opacity 0.5s;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
 
-/* 5.  Font Awesome overrides */
+/* 6.  Font Awesome overrides */
 
 .fa-styled-default {
   cursor: pointer;
@@ -622,7 +711,7 @@ button[variant="alt"]::after {
   stroke-width: 1rem;
 }
 
-/* 6.  Media Queries */
+/* 7.  Media Queries */
 
 /* Styles for mobile devices */
 @media only screen and 

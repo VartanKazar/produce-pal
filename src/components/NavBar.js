@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faCalendarAlt, faCircleXmark, faBars } from "@fortawesome/free-solid-svg-icons"
-import { Link } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
+
+    const { user } = useSelector((state) => state.user)
 
     //Dummy variables to temporarily make the indexed icons work.
     //Replace them with the redux <cartItemCount> and <plannerItemCount> variables when available.
     const cartitemCount = 0;
     const plannerItemCount = 0;
-
-    //Dummy variable to make the nav bar functionality work.
-    var user;
 
     const [drawer, setDrawer] = useState(0)
 
