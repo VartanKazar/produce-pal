@@ -1,11 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RecipeDefaultIcon from "../assets/recipe-default-icon.png"
 import StarRating from './StarRating';
+import { addRecipe, removeRecipe } from '../redux/slices/plannerSlice';
 
-const RecipeCard = ({data, detailsClick}) => {
+import { useSelector, useDispatch } from 'react-redux';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
+
+const RecipeCard = ({data, onClick}) => {
+
+    const dispatch = useDispatch()
+    const { recipes } = useSelector(state => state.planner)
+
+    const handleAddClick = (e) => {
+        e.stopPropagation()
+        dispatch(addRecipe(data))
+    }
+
+    const handleRemoveClick = (e) => {
+        e.stopPropagation()
+        dispatch(removeRecipe(data))
+    }
+
+    const getNumInPlanner = () => {
+        var count = 0
+
+        const item = recipes.find(recipe => recipe.id === data.id)
+
+        if(item){
+            count = item.numInPlanner
+        }
+
+        return `${count} in planner`
+    }
 
     return (
-        <div className='recipe-card-container' key = {`recipe-div-${data.id}`}>
+        <div 
+        className='recipe-card-container' 
+        key = {`recipe-div-${data.id}`}
+        onClick={onClick}
+        >
 
             <h3 
             style = {{
@@ -19,7 +54,7 @@ const RecipeCard = ({data, detailsClick}) => {
             {data && data.rating && data.reviews &&
                 <div className='recipe-card-star-section'>
                     <StarRating rating={data.rating}/>
-                    <h5>{`${data.reviews.length} ratings`}</h5>
+                    <p>{`${data.reviews.length} ratings`}</p>
                 </div>
             }
             <div className='recipe-image-container'>
@@ -30,14 +65,23 @@ const RecipeCard = ({data, detailsClick}) => {
                 />
             </div>
 
-            <h4>{`Calories: ${data.calories}`}</h4>
+            <p className='bold'>{`Calories: ${data.calories}`}</p>
 
-            <button 
-            variant="alt"
-            onClick={detailsClick}
-            >
-                See Details
-            </button>
+            <div className='recipe-card-controls'>
+                <FontAwesomeIcon 
+                icon={faMinus} 
+                className="fa-styled-circle-alt"
+                onClick={(e) => handleRemoveClick(e)}
+                />
+
+                {getNumInPlanner()}
+
+                <FontAwesomeIcon 
+                icon={faPlus} 
+                className="fa-styled-circle-alt"
+                onClick={(e) => handleAddClick(e)}
+                />
+            </div>
         </div>
     )
 }

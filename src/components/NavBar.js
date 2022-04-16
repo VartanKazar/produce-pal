@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 const NavBar = () => {
 
     const { user } = useSelector((state) => state.user)
+    const { recipes } = useSelector((state) => state.planner)
 
     //Dummy variables to temporarily make the indexed icons work.
     //Replace them with the redux <cartItemCount> and <plannerItemCount> variables when available.
     const cartitemCount = 0;
-    const plannerItemCount = 0;
 
     const [drawer, setDrawer] = useState(0)
 
@@ -29,6 +29,16 @@ const NavBar = () => {
             setDrawer(0)
     }
 
+    const getPlannerItemCount = () => {
+        var count = 0;
+
+        recipes.forEach(recipe => {
+            count += recipe.numInPlanner
+        })
+
+        return count
+    }
+
     return (
         <React.Fragment>
 
@@ -40,7 +50,7 @@ const NavBar = () => {
 
                 <div className='nav-bar-user-section'>
 
-                    <div className={`nav-icon-indexed ${plannerItemCount === 0 ? "hidden" : ""}`} count={plannerItemCount} >
+                    <div className={`nav-icon-indexed ${recipes.length === 0 ? "hidden" : ""}`} count={getPlannerItemCount()} >
                         <FontAwesomeIcon icon={faCalendarAlt} className="fa-styled-default"/>
                     </div>
 

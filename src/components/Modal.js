@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const Modal = ({state, onClose, content}) => {
 
     const handleClickOut = (event) => {
-        console.log(event)
         if(event.target.className === "modal-container active")
             onClose()
     }

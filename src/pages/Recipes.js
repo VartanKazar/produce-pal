@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import SearchSingle from '../components/SearchSingle';
 import RecipeCard from '../components/RecipeCard';
 import Modal from '../components/Modal';
+import {addRecipe} from "../redux/slices/plannerSlice"
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons"
@@ -12,6 +13,7 @@ import StarRating from '../components/StarRating';
 const Recipes = () => {
 
     const { recipes } = useSelector((state) => state.recipes)
+    const dispatch = useDispatch()
     
     const [detailsModal, setDetailsModal] = useState(undefined)
     const [selectedRecipe, setSelectedRecipe] = useState(undefined)
@@ -118,7 +120,6 @@ const Recipes = () => {
             </div>
         </div>
     )
-    
 
     return (
         <div className='recipes-page'>
@@ -129,8 +130,8 @@ const Recipes = () => {
                 recipes.map((recipe, index) => (
                     <RecipeCard 
                     data={recipe} 
-                    detailsClick={() => handleModalOpen(recipe)}
                     key={`recipe-${recipe.id}`}
+                    onClick={() => handleModalOpen(recipe)}
                     />
                 ))
             )}
