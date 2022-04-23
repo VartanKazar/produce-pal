@@ -11,9 +11,9 @@ const IndexedCard = ({index, title, description}) => {
         >
             <h3
             style = {{
-                textDecoration: "underline",
                 width: '100%',
-                textAlign: "center"
+                textAlign: "center",
+                marginBottom: "1rem"
             }}
             >
                 {title}

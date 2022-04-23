@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SearchSingle from '../components/SearchSingle';
 import RecipeCard from '../components/RecipeCard';
 import Modal from '../components/Modal';
 import {addRecipe} from "../redux/slices/plannerSlice"
@@ -7,7 +6,7 @@ import {addRecipe} from "../redux/slices/plannerSlice"
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons"
+import { faCircleXmark, faPencil, faTrashCan, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import StarRating from '../components/StarRating';
 
 const Recipes = () => {
@@ -17,6 +16,7 @@ const Recipes = () => {
     
     const [detailsModal, setDetailsModal] = useState(undefined)
     const [selectedRecipe, setSelectedRecipe] = useState(undefined)
+    const [searchFilters, setSearchFilters] = useState({})
 
     const handleModalOpen = (recipe) => {
         
@@ -26,6 +26,13 @@ const Recipes = () => {
 
     const handleModalClose = () => {
         setDetailsModal(undefined)
+    }
+
+    const handleSearchFiltersChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        setSearchFilters(values => ({...values, [name]: value}))
     }
 
     const detailsContent = () => {
@@ -123,7 +130,47 @@ const Recipes = () => {
 
     return (
         <div className='recipes-page'>
-            <SearchSingle/>
+
+            <form className='recipe-search-controls'>
+                
+                <div style = {{
+                    display: "grid",
+                    width: "100%",
+                    gridTemplateColumns: "auto 3rem",
+                    gap: "1rem"
+                }}>
+
+                    <input 
+                    id="recipe-search-text"
+                    type="search"
+                    placeholder="Search for a recipe"
+                    spellCheck={false}
+                    wrap="false"
+                    onChange={handleSearchFiltersChange}
+                    />
+
+                    <FontAwesomeIcon 
+                    icon={faMagnifyingGlass} 
+                    className='fa-styled-circle-alt fa-styled-golden'/>
+                </div>
+
+                <label htmlFor='recipe-sort' style={{
+                    width: '16ch'
+                }}>
+                    Sort By
+                    <select 
+                    id="recipe-sort" 
+                    name="recipe-sort"
+                    onChange={handleSearchFiltersChange}
+                    >
+                        <option key='recipe-sort-name' value='name'>Name</option>
+                        <option key='recipe-sort-rating' value='rating'>Rating</option>
+                        <option key='recipe-sort-calories' value='calories'>Calories</option>
+                        <option key='recipe-sort-cook-time' value='cook-time'>Cook Time</option>
+                    </select>
+                </label>
+
+            </form>
 
             {renderSection(
                 "My Recipes",

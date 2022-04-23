@@ -6,7 +6,7 @@ import { addRecipe, removeRecipe } from '../redux/slices/plannerSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faMinus, faClock } from "@fortawesome/free-solid-svg-icons"
 
 const RecipeCard = ({data, onClick}) => {
 
@@ -32,7 +32,7 @@ const RecipeCard = ({data, onClick}) => {
             count = item.numInPlanner
         }
 
-        return `${count} in planner`
+        return `${count} added`
     }
 
     return (
@@ -41,16 +41,29 @@ const RecipeCard = ({data, onClick}) => {
         key = {`recipe-div-${data.id}`}
         onClick={onClick}
         >
+            <span className='recipe-card-header-section'>
 
-            <h3 
-            style = {{
-                wordBreak: "break-word",
-                wordWrap: "break-word",
-                width: "100%",
-                textAlign: "center"
-            }}>
-                {data.name}
-            </h3>
+                <span>
+                    <i class="fa-solid fa-hourglass"></i>
+                    {data.cookTime}
+                </span>
+
+                <h3 
+                style = {{
+                    wordBreak: "break-word",
+                    wordWrap: "break-word",
+                    textAlign: "center",
+                    textDecoration: "underline"
+                }}>
+                    {data.name}
+                </h3>
+
+                <span>
+                    <i class="fa-solid fa-person"></i>
+                    {data.servingSize}
+                </span>
+
+            </span>
             {data && data.rating && data.reviews &&
                 <div className='recipe-card-star-section'>
                     <StarRating rating={data.rating}/>

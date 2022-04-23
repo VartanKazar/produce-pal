@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faCalendarAlt, faCircleXmark, faBars } from "@fortawesome/free-solid-svg-icons"
+import { faCartShopping, faCalendarAlt, faCircleXmark, faBars, faCar } from "@fortawesome/free-solid-svg-icons"
 
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
+
+    const navigate = useNavigate()
 
     const { user } = useSelector((state) => state.user)
     const { recipes } = useSelector((state) => state.planner)
@@ -51,11 +54,25 @@ const NavBar = () => {
                 <div className='nav-bar-user-section'>
 
                     <div className={`nav-icon-indexed ${recipes.length === 0 ? "hidden" : ""}`} count={getPlannerItemCount()} >
-                        <FontAwesomeIcon icon={faCalendarAlt} className="fa-styled-default"/>
+                        <FontAwesomeIcon 
+                        icon={faCalendarAlt} 
+                        className="fa-styled-default"
+                        onClick={() => navigate("/planner")}
+                        />
                     </div>
 
+                    <FontAwesomeIcon 
+                    icon={faCar} 
+                    className="fa-styled-default"
+                    onClick={() => navigate("/trips")}
+                    />
+
                     <div className={`nav-icon-indexed ${cartitemCount === 0  ? "hidden" : ""}`} count={cartitemCount} >
-                        <FontAwesomeIcon icon={faCartShopping} className="fa-styled-default"/>
+                        <FontAwesomeIcon 
+                        icon={faCartShopping} 
+                        className="fa-styled-default"
+                        onClick={() => navigate("/cart")}
+                        />
                     </div>
                     <button id="account-button">Login</button>
                 </div>

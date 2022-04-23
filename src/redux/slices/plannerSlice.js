@@ -1,8 +1,83 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    recipes: []
+    
+    recipes: [],
+
+    routines: [
+        {
+            id: 233567,
+            name: "quick run",
+            start: {
+                zipCode: 23315,
+                searchRadius: 10
+            },
+
+            shops: [
+                {
+                    name: "ralphs",
+                    address: "12345 Gumdrop Road",
+                    distance: 5.5
+                },
+
+                {
+                    name: "Costco",
+                    address: "16188 Swamp Drive",
+                    distance: 1.2
+                }
+            ]
+        },
+
+        {
+            id: 233569,
+            name: "quick run 2",
+            start: {
+                zipCode: 23315,
+                searchRadius: 10
+            },
+
+            shops: [
+                {
+                    name: "ralphs",
+                    address: "12345 Gumdrop Road",
+                    distance: 5.5
+                }
+            ]
+        },
+    ],
+
+    selectedRoutine: {
+        id: 233567,
+        name: "quick run",
+        start: {
+            zipCode: 23315,
+            searchRadius: 10
+        },
+
+        shops: [
+            {
+                name: "ralphs",
+                address: "12345 Gumdrop Road",
+                distance: 5.5
+            },
+
+            {
+                name: "Costco",
+                address: "16188 Swamp Drive",
+                distance: 1.2
+            }
+        ]
+    },
+
+    searchResults: []
 }
+
+export const findStoresAsync = createAsyncThunk(
+    'planner/findStores',
+    async () => {
+
+    }
+);
 
 export const plannerSlice = createSlice({
     name: 'planner',
@@ -41,11 +116,23 @@ export const plannerSlice = createSlice({
                 index++
             }
         },
+
+        selectRoutine: (state, action) => {
+            state.selectedRoutine = action.payload
+        },
+
+        clearSelectedRoutine: (state) => {
+            state.selectedRoutine = undefined
+        }
+    },
+
+    extraReducers: (builders) => {
+
     }
 });
 
 
 
-export const { addRecipe, removeRecipe } = plannerSlice.actions;
+export const { addRecipe, removeRecipe, selectRoutine, clearSelectedRoutine } = plannerSlice.actions;
 
 export default plannerSlice.reducer;

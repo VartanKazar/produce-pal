@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
 const initialState = {
+
+    //NOTE FOR FUTURE:  SPLIT UP THE RECIPES STATE INTO ITS OWN RESPECTIVE CATEGORES.  IE. MY-RECIPES, ITALIAN, ETC.
+    //On recipes page, only the fields needed for the RecipeCard front face will be retrieved from the database.
+    //Other fields will be retrieved only when the user clicks on a recipe card and opens a modal.
     recipes: [
         {
             id: 1,
@@ -10,6 +13,8 @@ const initialState = {
             rating: 3.35,
             categories: ["italian", "chicken", "dairy"], 
             calories: 1500,
+            servingSize: 1,
+            cookTime: "1:30",
             reviews: [
                 {
                     user: "Davey in the Navey",
@@ -70,6 +75,8 @@ const initialState = {
             rating: 5,
             categories: ["italian", "chicken", "dairy"], 
             calories: 1500,
+            servingSize: 1,
+            cookTime: "2:45",
             reviews: [
                 {
                     user: "Davey in the Navey",
