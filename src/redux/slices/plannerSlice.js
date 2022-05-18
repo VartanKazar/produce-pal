@@ -69,7 +69,7 @@ const initialState = {
         ]
     },
 
-    searchResults: []
+    searchResults: [],
 }
 
 export const findStoresAsync = createAsyncThunk(
@@ -84,37 +84,18 @@ export const plannerSlice = createSlice({
     initialState,
     reducers: {
         addRecipe: (state, action) => {
-
-            var itemFound = false
-            for(var recipe of state.recipes){
-                if(recipe.id === action.payload.id){
-                    itemFound = true
-                    recipe.numInPlanner += 1
-                    break
-                }
-            }
-
-            if(!itemFound){
-                let item = {...action.payload}
-                item.numInPlanner = 1
-                state.recipes.push(item)
-            }
+            state.recipes.push(action.payload)
         },
 
         removeRecipe: (state, action) => {
-
-            var index = 0
-            for(var recipe of state.recipes){
-                if(recipe.id === action.payload.id){
-                    if(recipe.numInPlanner === 1)
-                        state.recipes.splice(index, 1)
-
-                    else recipe.numInPlanner -= 1
-
-                    break
+            let itemFound = false
+            state.recipes = state.recipes.filter(recipe => {
+                if(recipe.id === action.payload.id && !itemFound){
+                    itemFound = true
                 }
-                index++
-            }
+
+                else return recipe
+            })
         },
 
         selectRoutine: (state, action) => {
@@ -123,7 +104,9 @@ export const plannerSlice = createSlice({
 
         clearSelectedRoutine: (state) => {
             state.selectedRoutine = undefined
-        }
+        },
+
+
     },
 
     extraReducers: (builders) => {

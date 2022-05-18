@@ -1,0 +1,44 @@
+@use '../abstracts' as *;
+
+@import '../font-awesome/scss/fontawesome.scss';
+@import '../font-awesome/scss/solid.scss';
+
+.icon {
+    cursor: pointer;
+    color: $icon-color-primary;
+    filter: drop-shadow(1px 1px 1px $shadow-color);
+    transition: 0.25s;
+    width: 2rem;
+    height: 2rem;
+
+    @include icon-hover($icon-color-primary-hover);
+    @include icon-sizes(0.25, 16, 0.5);
+
+    &.alt {
+        color: $text-color-primary;
+        background-color: $icon-color-primary;
+        border-radius: 100%;
+        padding: 0.5rem;
+
+        @include icon-hover( 
+            $color: $text-color-primary,
+            $background-color: $icon-color-primary-hover,
+            $type: 'alt'
+        );
+    }
+    
+    &.del {
+        color: $text-color-alt;
+        background-color: $icon-bg-color-delete;
+        border-radius: 100%;
+        padding: 0.5rem;
+
+        @include icon-hover(
+            $color: $text-color-alt,
+            $background-color: $icon-bg-color-delete-hover,
+            $border-color: $icon-border-color-delete,
+            $type: 'alt'
+        );
+    } 
+
+}

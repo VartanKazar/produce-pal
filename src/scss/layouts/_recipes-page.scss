@@ -1,0 +1,121 @@
+@use '../abstracts' as *;
+
+.recipes-page {
+  @include flexContainer($gap: 4rem);
+  width: 100%;
+  padding: 3rem 2rem 1rem 2rem;
+}
+
+.recipes-category-container {
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  max-height: 30rem;
+}
+
+.recipes-category-header {
+  @include flexContainer($direction: row, $justify: flex-start, $align: flex-end, $gap: 2rem);
+  width: 100%;
+}
+
+.recipes-page-section {
+  @include flexContainer($direction: row, $justify: flex-start, $align: stretch, $gap: 1.5rem,);
+  flex-grow: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.recipe-search-controls {
+  @include flexContainer($direction: row, $justify: flex-start, $gap: 1rem);
+  width: 60%;
+}
+
+
+.recipe-modal-container {
+  @include flexContainer($gap: 2rem);
+}
+
+.recipe-modal-toolbar {
+  @include flexContainer($direction: row, $gap: 1rem, $justify: space-between, $align: center);
+  width: 100%;
+}
+
+.recipe-modal-categories {
+  @include flexContainer(row, $gap: 1ch);
+}
+
+.recipe-modal-section {
+  width: 100%;
+  padding: 1rem;
+  background-color: $background-color-primary;
+  border: 1px solid $card-color-primary-border;
+  border-radius: 1rem;
+
+  & > div {
+    @include flexContainer($justify: flex-start, $align: flex-start, $gap: 1rem);
+    padding: 0.5rem 0rem;
+  }
+
+  &.bordered > div:not(:last-child) {
+    border-bottom: 1px dashed $divider-color;
+  }
+}
+
+.review-title-section {
+  @include flexContainer($direction: row, $justify: flex-start, $align: flex-start, $gap: 1rem);
+}
+
+.recipe-form {
+  @include flexContainer($direction: row, $justify: flex-start, $align: center, $gap: 2rem);
+
+  & > *:first-child {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-self: flex-end;
+  }
+}
+
+.recipe-form-ingredients {
+  @include gridContainer($col-template: repeat(4, auto), $width: auto);
+  width: auto;
+
+  & > *:last-child, & > *:first-child {
+    grid-column: span 4;
+    justify-items: center;
+    place-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.recipe-form-instructions {
+  @include flexContainer();
+  width: 100%;
+
+  & > *:first-child {
+    width: 100%;
+    text-align: center;
+  }
+
+  & > div {
+    @include gridContainer($col-template: auto auto, $gap: 1rem);
+    background-color: $background-color-primary;
+    padding: 1rem;
+    border: 1px solid $card-color-primary-border;
+    border-radius: 1rem;
+
+    & > *:first-child {
+      grid-column: span 2;
+      justify-self: flex-end;
+    }
+
+    & > *:last-child {
+      grid-column: span 2;
+      justify-self: center;
+      width: max-content;
+    }
+  }
+}

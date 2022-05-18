@@ -1,0 +1,125 @@
+@use '../abstracts' as *;
+
+.nav-bar {
+  @include flexContainer(row, space-between, center);
+  position: relative;
+  box-sizing: border-box;
+  padding: 0.5rem 1.5rem;
+  color: $icon-color-primary-border;
+  border-bottom: 1px solid $divider-color;
+  font-size: clamp(0.75rem, -0.1rem + 2vw, 1.25rem);
+  width: 100%;
+  transition: 0.5s;
+}
+  
+
+.nav-bar-drawer-container {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  background-color: rgba(0, 0, 0, 0.0);
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+
+  &.active {
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    background-color: $fadeout-color;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.5s;
+    overflow-x: hidden;
+  }
+}
+  
+
+.nav-bar-drawer {
+  @include flexContainer($justify: flex-start, $align: flex-end, $gap: 0);
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: $background-color-primary;
+  z-index: -3;
+  transition: 0.3s;
+  overflow: hidden;
+
+  &.active {
+    visibility: visible;
+    width: 24ch;
+    z-index: 99;
+    transition: 0.3s;
+    overflow-x: hidden;
+  }
+}
+
+.drawer-collapse-icon {
+  margin: 0.5rem 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.nav-bar-user-section {
+  @include flexContainer(row, $gap: 2rem);
+  transition: 0.25s;
+}
+
+.nav-icon-indexed {
+  position: relative;
+
+  &::after {
+    visibility: visible;
+    @include flexContainer($gap: 0);
+    position: absolute;
+    content: attr(count);
+    bottom: -0.35rem;
+    right: -0.35rem;
+    width: 3ch;
+    height: 3ch;
+    color: $text-color-primary;
+    background-color: $highlight-color;
+    border: 1px solid $highlight-color-border;
+    border-radius: 3ch;
+    padding: 2px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 0.8rem;
+  
+  }
+  &.hidden::after {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+#nav-bar-link {
+  cursor: pointer;
+  width: 100%;
+  background-color: $background-color-primary;
+  border-bottom: 1px solid $divider-color;
+  text-align: end;
+  padding: 1rem 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: 0.25s;
+  text-decoration: none;
+  color: $text-color-primary;
+  white-space: nowrap;
+  overflow-x: hidden;
+  word-wrap: normal;
+
+  &:hover {
+    background-color: $background-color-accent;
+    border-bottom: 1px solid $input-border-color-focus;
+    transition: 0.25s;
+  }
+}

@@ -1,0 +1,64 @@
+@use './colors' as *;
+
+@mixin flexContainer (
+      $direction: column, 
+      $justify: center, 
+      $align: center, 
+      $gap: 1rem, 
+      $wrap-type: wrap
+  ) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap-type;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+@mixin gridContainer (
+  $col-template: auto,
+  $row-template: auto,
+  $gap: 1rem,
+  $width: 100%
+) {
+  display: grid;
+  grid-template-columns: $col-template;
+  grid-template-rows: $row-template;
+  gap: $gap;
+  width: $width;
+}
+
+@mixin icon-hover (
+  $color: $icon-color-primary-hover, 
+  $border-color: $icon-color-primary-border,
+  $background-color: 'transparent',
+  $type: 'standard'
+  ) {
+
+    &:hover{
+      scale: 1.05;
+      color: $color;
+      background-color: $background-color;
+      stroke: $border-color;
+      transition: all 0.25s;
+
+      @if $type == "standard" {
+      
+        filter: drop-shadow(2px 1px 2px $shadow-color);
+      }
+
+      @if $type == "alt" {
+      
+        box-shadow: 2px 1px 2px 0px $shadow-color;
+      }
+  }
+}
+
+@mixin icon-sizes ($increment: 0.25, $num-sizes: 4, $start-size: 1) {
+  @for $i from 1 through $num-sizes {
+    &.icon-size-#{$i}{
+      width: #{$start-size + ($increment * $i)}rem;
+      height: #{$start-size + ($increment * $i)}rem;
+    }
+  }
+}

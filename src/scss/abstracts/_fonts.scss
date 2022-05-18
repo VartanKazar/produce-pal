@@ -1,0 +1,24 @@
+
+@for $i from 1 to 6 {
+    .font-weight-#{$i}{
+        font-weight: #{400 + ($i * 100)};
+    }
+}
+
+@for $i from 1 to 13 {
+    .font-size-#{$i}{
+        font-size: #{0.6 + ($i * 0.2)}rem;
+    }
+}
+
+.font-style-italic {
+    font-style: italic;
+}
+
+.text-decoration-underline {
+    text-decoration: underline;
+}
+
+.text-center {
+    text-align: center;
+}

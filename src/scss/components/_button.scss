@@ -1,0 +1,29 @@
+@use '../abstracts' as *;
+
+.button {
+    position: relative;
+    cursor: pointer;
+    font-size: 1rem;
+    color: $text-color-primary;
+    padding: 0.5rem;
+    background-color: $icon-color-primary;
+    border: 1px solid $icon-color-primary-border;
+    border-radius: 2rem;
+    box-shadow: 2px 1px 2px 0px $shadow-color;
+    z-index: 1;
+    transition: 0.25s;
+  }
+  
+  .button:not(:disabled):hover {
+    scale: 1.05;
+    box-shadow: 3px 2px 3px 0px $shadow-color;
+    background-color: $icon-color-primary-hover;
+    transition: 0.25s;
+  }
+  
+  .button:disabled {
+    cursor: default;
+    filter: grayscale(1);
+    opacity: 0.5;
+    box-shadow: none;
+  }

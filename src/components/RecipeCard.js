@@ -1,50 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import RecipeDefaultIcon from "../assets/recipe-default-icon.png"
 import StarRating from './StarRating';
-import { addRecipe, removeRecipe } from '../redux/slices/plannerSlice';
-
-import { useSelector, useDispatch } from 'react-redux';
+import { addRecipe } from '../redux/slices/plannerSlice';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus, faClock } from "@fortawesome/free-solid-svg-icons"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+
+import { useSelector, useDispatch } from 'react-redux';
 
 const RecipeCard = ({data, onClick}) => {
 
     const dispatch = useDispatch()
     const { recipes } = useSelector(state => state.planner)
 
+    const [isAdded, setIsAdded] = useState(0)
+
     const handleAddClick = (e) => {
         e.stopPropagation()
         dispatch(addRecipe(data))
+        setIsAdded(1)
     }
 
-    const handleRemoveClick = (e) => {
-        e.stopPropagation()
-        dispatch(removeRecipe(data))
-    }
+    //Checks if the recipe is already in the user's planner.
+    //If it is, disable the Add To Planner button.
+    const getAddState = () => {
+        let isAdded = 0
 
-    const getNumInPlanner = () => {
-        var count = 0
+        recipes.forEach(addedRecipe => {
+            if(addedRecipe.id === data.id)
+                isAdded = 1
+        })
 
-        const item = recipes.find(recipe => recipe.id === data.id)
-
-        if(item){
-            count = item.numInPlanner
-        }
-
-        return `${count} added`
+        return isAdded
     }
 
     return (
         <div 
-        className='recipe-card-container' 
+        className={`recipe-card-container ${isAdded && "disabled"}`}
         key = {`recipe-div-${data.id}`}
         onClick={onClick}
         >
             <span className='recipe-card-header-section'>
 
                 <span>
-                    <i class="fa-solid fa-hourglass"></i>
+                    <i className="fa-solid fa-hourglass"></i>
                     {data.cookTime}
                 </span>
 
@@ -59,7 +58,7 @@ const RecipeCard = ({data, onClick}) => {
                 </h3>
 
                 <span>
-                    <i class="fa-solid fa-person"></i>
+                    <i className="fa-solid fa-person"></i>
                     {data.servingSize}
                 </span>
 
@@ -67,34 +66,32 @@ const RecipeCard = ({data, onClick}) => {
             {data && data.rating && data.reviews &&
                 <div className='recipe-card-star-section'>
                     <StarRating rating={data.rating}/>
-                    <p>{`${data.reviews.length} ratings`}</p>
+                    <p style={{fontStyle: "italic"}}>{`(${data.reviews.length})`}</p>
                 </div>
             }
-            <div className='recipe-image-container'>
+            <div className='image-container'>
                 <img 
-                className='recipe-image'
+                className='image'
                 src={RecipeDefaultIcon}
                 alt=""
                 />
             </div>
 
-            <p className='bold'>{`Calories: ${data.calories}`}</p>
+            <p>{`${data.calories} Calories`}</p>
 
-            <div className='recipe-card-controls'>
+            <button 
+            className="button"
+            onClick={(e) => handleAddClick(e)}
+            disabled={getAddState()}
+            >
                 <FontAwesomeIcon 
-                icon={faMinus} 
-                className="fa-styled-circle-alt"
-                onClick={(e) => handleRemoveClick(e)}
+                icon={faPlus}
+                style = {{
+                    marginRight: "0.5rem"
+                }}
                 />
-
-                {getNumInPlanner()}
-
-                <FontAwesomeIcon 
-                icon={faPlus} 
-                className="fa-styled-circle-alt"
-                onClick={(e) => handleAddClick(e)}
-                />
-            </div>
+                Add
+            </button>
         </div>
     )
 }

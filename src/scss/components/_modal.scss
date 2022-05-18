@@ -1,0 +1,40 @@
+@use '../abstracts' as *;
+
+.modal-container {
+  @include flexContainer();
+  visibility: hidden;
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  opacity: 0;
+  transition: all 0.3s;
+
+  &.active {
+    visibility: visible;
+    background-color: $fadeout-color;
+    opacity: 1;
+    transition: all 0.3s;
+  }
+}
+
+.modal-content-container {
+  max-width: 60%;
+  max-height: 75%;
+  background-color: $card-color-primary;
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 1px solid $card-color-primary-border;
+  border-radius: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 100;
+}
+
+.modal-toolbar {
+  @include flexContainer($direction: row, $justify: flex-end, $gap: 2rem);
+  margin-bottom: 1rem;
+}

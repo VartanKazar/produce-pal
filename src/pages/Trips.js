@@ -46,12 +46,14 @@ const Trips = () => {
                     <h2>Use one of your shopping routines</h2>
 
                     <button
+                    className='button'
                     onClick={() => setPageView(2)}
                     >
                         Search Stores
                     </button>
 
                     <button
+                    className='button'
                     onClick={() => setPageView(3)}
                     >
                         Pick a Routine
@@ -85,6 +87,7 @@ const Trips = () => {
             <React.Fragment>
 
                 <button 
+                className='button'
                 type="button" 
                 variant="icon"
                 onClick={() => setPageView(1)}
@@ -119,7 +122,7 @@ const Trips = () => {
                     </label>
 
 
-                    <button type="submit" variant="icon">
+                    <button className='button' type="submit" variant="icon">
                         <i className="fa-solid fa-magnifying-glass" type="submit"></i>
                     </button>
                 </form>
@@ -148,6 +151,7 @@ const Trips = () => {
         return (
             <React.Fragment>
                 <button 
+                className='button'
                 type="reset" 
                 variant="icon"
                 onClick={() => setPageView(1)}
@@ -177,6 +181,7 @@ const Trips = () => {
                     </select>
 
                     <button 
+                    className='button'
                     type="reset" 
                     variant="icon"
                     onClick={handleSubmitClick}

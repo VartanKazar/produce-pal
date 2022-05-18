@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faCalendarAlt, faCircleXmark, faBars, faCar } from "@fortawesome/free-solid-svg-icons"
+import { faCartShopping, faCalendarAlt, faX, faBars, faCar } from "@fortawesome/free-solid-svg-icons"
 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -32,49 +32,43 @@ const NavBar = () => {
             setDrawer(0)
     }
 
-    const getPlannerItemCount = () => {
-        var count = 0;
-
-        recipes.forEach(recipe => {
-            count += recipe.numInPlanner
-        })
-
-        return count
-    }
-
     return (
         <React.Fragment>
 
             <div className="nav-bar">
                 
-                <FontAwesomeIcon icon={faBars} className="fa-styled-default" onClick={() => handleDrawerClick()}/>
+                <FontAwesomeIcon 
+                icon={faBars} 
+                className="icon"
+                onClick={() => handleDrawerClick()}/>
                 
                 <h2 className='nav-bar-title'>Produce Pal</h2>
 
                 <div className='nav-bar-user-section'>
 
-                    <div className={`nav-icon-indexed ${recipes.length === 0 ? "hidden" : ""}`} count={getPlannerItemCount()} >
+                    <div 
+                    className={`nav-icon-indexed ${recipes.length === 0 ? "hidden" : ""}`} count={recipes.length} >
                         <FontAwesomeIcon 
                         icon={faCalendarAlt} 
-                        className="fa-styled-default"
+                        className="icon"
                         onClick={() => navigate("/planner")}
                         />
                     </div>
 
                     <FontAwesomeIcon 
                     icon={faCar} 
-                    className="fa-styled-default"
+                    className="icon"
                     onClick={() => navigate("/trips")}
                     />
 
                     <div className={`nav-icon-indexed ${cartitemCount === 0  ? "hidden" : ""}`} count={cartitemCount} >
                         <FontAwesomeIcon 
                         icon={faCartShopping} 
-                        className="fa-styled-default"
+                        className="icon"
                         onClick={() => navigate("/cart")}
                         />
                     </div>
-                    <button id="account-button">Login</button>
+                    
                 </div>
             </div>
 
@@ -87,12 +81,15 @@ const NavBar = () => {
             <aside className={`nav-bar-drawer ${drawer === 1 ? "active" : ""}`}>
                 
                 <FontAwesomeIcon 
-                icon={faCircleXmark} 
-                className="fa-styled-default drawer-collapse-icon" 
-                onClick={() => handleDrawerClick()}/>
+                style = {{
+                    margin: "0.5rem 1rem"
+                }}
+                icon={faX} 
+                className="icon alt icon-size-3" 
+                onClick={() => handleDrawerClick()}
+                />
                 
                 <a id="nav-bar-link" href="/">Home</a>
-                <a id="nav-bar-link" href="/recipes">Recipes</a>
                 <a id="nav-bar-link">{user ? "Sign Out" : "Sign In"}</a>
             </aside>
         </React.Fragment>
